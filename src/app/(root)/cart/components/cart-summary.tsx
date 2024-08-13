@@ -3,6 +3,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 import data from "@/constants/data";
 import React, { useState } from "react";
 import { X } from "lucide-react";
+import { showToast } from "@/components/toast";
 
 const parsePrice = (price: string): number =>
   parseFloat(price.replace("₹", "").replace(",", ""));
@@ -31,6 +32,7 @@ const CartSummary = () => {
     if (coupon === "SAVE10") {
       setAppliedCoupon(coupon);
       setCouponMessage("");
+      showToast("Coupon applied successfully");
     } else {
       setCouponMessage("Invalid code");
       setAppliedCoupon("");
