@@ -1,7 +1,7 @@
 "use client";
 import { useAppSelector } from "@/lib/store/hooks";
 import data from "@/constants/data";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { showToast } from "@/components/toast";
 
@@ -33,11 +33,20 @@ const CartSummary = () => {
       setAppliedCoupon(coupon);
       setCouponMessage("");
       showToast("Coupon applied successfully");
+      localStorage.setItem("appliedCoupon", coupon);
     } else {
       setCouponMessage("Invalid code");
       setAppliedCoupon("");
+      localStorage.removeItem("appliedCoupon");
     }
   };
+
+  useEffect(() => {
+    const savedCoupon = localStorage.getItem("appliedCoupon");
+    if (savedCoupon) {
+      setAppliedCoupon(savedCoupon);
+    }
+  }, []);
 
   return (
     <>
@@ -53,7 +62,10 @@ const CartSummary = () => {
                 <X
                   size={18}
                   className="text-white cursor-pointer"
-                  onClick={() => setAppliedCoupon("")}
+                  onClick={() => {
+                    setAppliedCoupon("");
+                    localStorage.removeItem("appliedCoupon");
+                  }}
                 />
               </div>
             ) : (
