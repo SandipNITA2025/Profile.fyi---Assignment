@@ -1,7 +1,5 @@
 # Ecommerce Cart Application
 
-This Ecommerce Cart Application is a modern online shopping platform built with Next.js and TypeScript. It leverages Redux Toolkit for state management and Tailwind CSS for styling.
-
 ## Features
 
 - Shopping cart functionality
